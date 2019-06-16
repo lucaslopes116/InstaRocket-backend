@@ -7,6 +7,7 @@ const app = express();
 
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const PORT = process.env.PORT || 3333;
 
 mongoose.connect('mongodb+srv://lucas:lucas@cluster0-isokr.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser:true,
@@ -24,4 +25,6 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads', 'resiz
 
 app.use(require('./routes'));
 
-server.listen(process.env.PORT || 3333);
+server.listen(PORT, ()=> {
+    console.log("Connected to port:" + PORT);
+});
